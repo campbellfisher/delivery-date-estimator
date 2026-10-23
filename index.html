@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delivery Date Estimator — Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <!-- A deliberately plain, product-page-style layout: the widget has to
+         earn its place next to the buy button, like it would in a real store. -->
+    <section class="product">
+      <div class="product-media" aria-hidden="true">
+        <div class="product-art">CERAMIC<br />POUR-OVER<br />SET</div>
+      </div>
+
+      <div class="product-info">
+        <p class="product-vendor">North Fork Pottery</p>
+        <h1 class="product-title">Ceramic Pour-Over Coffee Set</h1>
+        <p class="product-price">$64.00</p>
+        <p class="product-blurb">
+          Stoneware dripper and carafe, glazed by hand. Brews two generous
+          cups and looks good doing it.
+        </p>
+
+        <!-- The widget: one line that answers "when will it get here?"
+             before the shopper has to ask. -->
+        <div id="delivery-estimate" class="edd-widget" aria-live="polite">
+          <p class="edd-window">Calculating delivery estimate…</p>
+        </div>
+
+        <button class="buy-button" type="button">Add to cart — $64.00</button>
+        <p class="product-meta">Free returns within 30 days · Secure checkout</p>
+      </div>
+    </section>
+
+    <!-- Demo controls: in a real store these values come from the merchant's
+         fulfilment settings, not from the shopper. They are exposed here so
+         the effect of each input on the estimate is visible. -->
+    <section class="controls">
+      <h2>Merchant settings (demo controls)</h2>
+      <form id="settings-form">
+        <label>
+          Daily order cutoff
+          <input type="time" id="cutoff" value="14:00" />
+        </label>
+        <label>
+          Processing days (min – max)
+          <span class="range-inputs">
+            <input type="number" id="process-min" value="1" min="0" max="14" />
+            <input type="number" id="process-max" value="2" min="0" max="14" />
+          </span>
+        </label>
+        <label>
+          Transit days (min – max)
+          <span class="range-inputs">
+            <input type="number" id="transit-min" value="2" min="0" max="30" />
+            <input type="number" id="transit-max" value="4" min="0" max="30" />
+          </span>
+        </label>
+      </form>
+      <p class="controls-note">
+        Change any value and the estimate above updates instantly. All dates
+        are business days — weekends are skipped.
+      </p>
+    </section>
+  </main>
+
+  <script src="estimator.js"></script>
+  <script>
+    // Wire the demo controls to the widget. In production this config would
+    // be rendered into the page by the shop's theme (e.g. from metafields).
+    const widget = document.getElementById("delivery-estimate");
+    const form = document.getElementById("settings-form");
+
+    function readConfig() {
+      return {
+        cutoffTime: document.getElementById("cutoff").value || "14:00",
+        processMin: Number(document.getElementById("process-min").value) || 0,
+        processMax: Number(document.getElementById("process-max").value) || 0,
+        transitMin: Number(document.getElementById("transit-min").value) || 0,
+        transitMax: Number(document.getElementById("transit-max").value) || 0,
+      };
+    }
+
+    function update() {
+      renderEstimate(widget, readConfig());
+    }
+
+    form.addEventListener("input", update);
+    update();
+
+    // Keep the "order within …" countdown honest while the page sits open.
+    setInterval(update, 60000);
+  </script>
+</body>
+</html>

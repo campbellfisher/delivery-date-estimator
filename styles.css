@@ -1,0 +1,131 @@
+/* Delivery Date Estimator — demo styles.
+   Plain, store-like styling: the point of the demo is the estimate,
+   so the page stays quiet and the widget line stays readable. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1c1c1e;
+  background: #f6f5f2;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 20px 64px;
+}
+
+/* --- Product layout ------------------------------------------------ */
+
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: #fff;
+  border: 1px solid #e4e1da;
+  border-radius: 12px;
+  padding: 36px;
+}
+
+@media (max-width: 700px) {
+  .product { grid-template-columns: 1fr; }
+}
+
+.product-media {
+  background: #efe9df;
+  border-radius: 8px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-art {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-align: center;
+  line-height: 1.6;
+  color: #8a7a5f;
+}
+
+.product-vendor {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  color: #8a8578;
+  margin: 0 0 6px;
+}
+
+.product-title { margin: 0 0 10px; font-size: 28px; line-height: 1.2; }
+.product-price { font-size: 20px; font-weight: 600; margin: 0 0 14px; }
+.product-blurb { color: #4c4a44; line-height: 1.55; margin: 0 0 22px; }
+
+/* --- The widget ------------------------------------------------------ */
+
+.edd-widget {
+  border: 1px solid #d9e4d5;
+  background: #f2f7ef;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+
+.edd-window { margin: 0; font-size: 16px; }
+.edd-note { margin: 6px 0 0; font-size: 13px; color: #55614f; }
+
+.buy-button {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: #1c1c1e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.buy-button:hover { background: #333336; }
+
+.product-meta { font-size: 13px; color: #8a8578; text-align: center; margin: 12px 0 0; }
+
+/* --- Demo controls --------------------------------------------------- */
+
+.controls {
+  margin-top: 28px;
+  background: #fff;
+  border: 1px solid #e4e1da;
+  border-radius: 12px;
+  padding: 24px 36px;
+}
+
+.controls h2 { font-size: 16px; margin: 0 0 16px; }
+
+.controls form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.controls input {
+  padding: 8px 10px;
+  border: 1px solid #cfccc2;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 110px;
+}
+
+.range-inputs { display: flex; gap: 8px; }
+.range-inputs input { width: 64px; }
+
+.controls-note { font-size: 13px; color: #8a8578; margin: 16px 0 0; }
